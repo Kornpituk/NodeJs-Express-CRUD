@@ -29,7 +29,7 @@ This project is for showcasing backend skills when applying for jobs.
 
 Clone repo:
 ```bash
-git clone https://github.com/username/express-postgres-crud.git
+git clone https://github.com/Kornpituk/NodeJs-Express-CRUD.git
 cd express-postgres-crud
 
 
