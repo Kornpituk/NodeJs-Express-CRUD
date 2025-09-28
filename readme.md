@@ -110,7 +110,7 @@ Add CI/CD with GitHub Actions
 👨‍💻 Author
 
 Kornpitak Kannika
-LinkedIn | GitHub
+LinkedIn: https://www.linkedin.com/feed/ | GitHub: https://github.com/Kornpituk?tab=repositories
 
 ## 🙏 Acknowledgements
 
