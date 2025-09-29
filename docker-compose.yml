@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=express-crud
+    depends_on:
+      - db
+    networks:
+      - crud_network
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: express-crud
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - crud_network
+
+networks:
+  crud_network:
+
+volumes:
+  db_data:
