@@ -118,4 +118,6 @@ app.get("/", async (req, res) => {
 //     console.log(`Server is running on http://0.0.0.0:${port}`);
 // });
 
+export default app; // <-- เพิ่มบรรทัดนี้เพื่อให้ test import ได้
+
 startServers();
