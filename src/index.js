@@ -9,7 +9,7 @@ import fs from "fs";
 
 import userRoutes from "./routes/userRouters.js";
 import errorHandling from "./middlewares/errorHandle.js";
-import createUserTable from "./data/createUserTable.js";
+import createUserTable, {createTableTest}  from "./data/createUserTable.js";
 
 dotenv.config();
 
@@ -101,6 +101,8 @@ function awaitSafeRequire(name) {
 
 // Create table before starting servers
 createUserTable();
+
+createTableTest();
 
 
 //Testing postgres connection
