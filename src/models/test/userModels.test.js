@@ -14,7 +14,7 @@ describe("User Service", () => {
   let testUser;
 
   beforeAll(async () => {
-    testUser = await createUserService("Test User", "test@example.com");
+    testUser = await createUserService("Test User", "test@gmail.com");
   });
 
   afterAll(async () => {
@@ -32,17 +32,17 @@ describe("User Service", () => {
     const user = await getUserByIdService(testUser.id);
     expect(user).toHaveProperty("id", testUser.id);
     expect(user).toHaveProperty("name", "Test User");
-    expect(user).toHaveProperty("email", "test@example.com");
+    expect(user).toHaveProperty("email", "test@gmail.com");
   });
 
   it("should update user", async () => {
     const updatedUser = await updateUserService(
       testUser.id,
       "Updated User",
-      "updated@example.com"
+      "updated@gmail.com"
     );
     expect(updatedUser.name).toBe("Updated User");
-    expect(updatedUser.email).toBe("updated@example.com");
+    expect(updatedUser.email).toBe("updated@gmail.com");
   });
 
   it("should delete user", async () => {

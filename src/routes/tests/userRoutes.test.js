@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
 import request from "supertest";
-import app from "/src/index.js"; // ปรับ path ให้ตรงกับโครงสร้าง project
-
+import app from "/src/app.js";
 jest.setTimeout(10000);
 
 describe("Users API Routes", () => {
@@ -16,41 +15,42 @@ describe("Users API Routes", () => {
     server.close(done); // ปิด server หลัง test
   });
 
-  it("POST /api/users -> create a new user", async () => {
+  it("POST /api/user -> create a new user", async () => {
     const res = await request(server)
-      .post("/api/users")
+      .post("/api/user")
       .send({ name: "Route Test", email: "route@gmail.com" });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty("id");
-    expect(res.body.name).toBe("Route Test");
-    testUser = res.body; // เก็บ id สำหรับ test ต่อ
+    expect(res.body.data).toHaveProperty("id");
+    expect(res.body.data.name).toBe("Route Test");
+    testUser = res.body.data; // เก็บ user object ไว้ใช้ต่อ
   });
 
   it("GET /api/users -> get all users", async () => {
     const res = await request(server).get("/api/users");
+    console.log(res.body); // 👈 ดูว่าคืนอะไรมาจริงๆ
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
   });
 
   it("GET /api/users/:id -> get user by id", async () => {
-    const res = await request(server).get(`/api/users/${testUser.id}`);
+    const res = await request(server).get(`/api/user/${testUser.id}`);
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("id", testUser.id);
+    expect(res.body.data).toHaveProperty("id", testUser.id); // หรือใช้ testUser.id ถ้ามี
   });
 
-  it("PUT /api/users/:id -> update user", async () => {
+  it("PUT /api/user/:id -> update user", async () => {
     const res = await request(server)
-      .put(`/api/users/${testUser.id}`)
+      .put(`/api/user/${testUser.id}`)
       .send({ name: "Updated Route", email: "updated@route.com" });
 
     expect(res.statusCode).toBe(200);
-    expect(res.body.name).toBe("Updated Route");
+    expect(res.body.data.name).toBe("Updated Route");
   });
 
-  it("DELETE /api/users/:id -> delete user", async () => {
-    const res = await request(server).delete(`/api/users/${testUser.id}`);
+  it("DELETE /api/user/:id -> delete user", async () => {
+    const res = await request(server).delete(`/api/user/${testUser.id}`);
     expect(res.statusCode).toBe(200);
-    expect(res.body.id).toBe(testUser.id);
+    expect(res.body.data.id).toBe(testUser.id);
   });
 });
